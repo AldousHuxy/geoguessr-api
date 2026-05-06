@@ -1,0 +1,57 @@
+[
+    {
+        "scoreId": 1,
+        "score": 5000,
+        "email": "user@example.com"
+    },
+    {
+        "scoreId": 2,
+        "score": 4500,
+        "email": "admin@example.com"
+    },
+    {
+        "scoreId": 3,
+        "score": 3000,
+        "email": "person@contact.com"
+    },
+    {
+        "scoreId": 4,
+        "score": 4750,
+        "email": "john.doe@gmail.com"
+    },
+    {
+        "scoreId": 5,
+        "score": 1200,
+        "email": "jane.smith@outlook.com"
+    },
+    {
+        "scoreId": 6,
+        "score": 3850,
+        "email": "carlos.m@yahoo.com"
+    },
+    {
+        "scoreId": 7,
+        "score": 2200,
+        "email": "test.player@hotmail.com"
+    },
+    {
+        "scoreId": 8,
+        "score": 4990,
+        "email": "geo.fan@gmail.com"
+    },
+    {
+        "scoreId": 9,
+        "score": 750,
+        "email": "newbie99@example.com"
+    },
+    {
+        "scoreId": 10,
+        "score": 3300,
+        "email": "mapper.pro@district.com"
+    },
+    {
+        "scoreId": 11,
+        "score": 4100,
+        "email": "player11@example.com"
+    }
+]
