@@ -16,7 +16,7 @@ db.once('open', () => console.log(`Connected to database: ${db.name}`))
 
 app.use(json())
 app.use(urlencoded({ extended: true }))
-app.use(cors({ origin: CLIENT_URL }))
+app.use(cors({ origin: '*' }))
 app.use(logger)
 
 app.get('/', (req: Request, res: Response) => { res.json(`Success: ${Date().toString()}`) })
