@@ -23,6 +23,7 @@ https://geoguessr-api.onrender.com
 | `GET` | `/api/scores` | Returns all scores |
 | `GET` | `/api/scores/top` | Returns the top 10 scores, sorted highest first |
 | `POST` | `/api/scores` | Submits a score for a given email |
+| `DELETE` | `/api/scores` | Clears all scores; requires the server-side reset key |
 
 #### POST `/api/scores`
 
@@ -40,6 +41,10 @@ https://geoguessr-api.onrender.com
 - The stored score is only updated if the new score is **higher**
 - Returns `403` if the attempt limit has been reached
 
+#### DELETE `/api/scores`
+
+Requires the `x-score-reset-token` request header to match the server's `SCORE_RESET_TOKEN`. The reset key must be at least 32 characters long. Returns the number of deleted scores.
+
 ## Tech Stack
 
 - **Runtime:** Node.js
@@ -56,6 +61,7 @@ https://geoguessr-api.onrender.com
 | `MONGO_URI` | MongoDB connection string |
 | `CLIENT_URL` | Allowed CORS origin (e.g. `https://aldoushuxy.github.io`) |
 | `NODE_ENV` | Environment (`development` or `production`) |
+| `SCORE_RESET_TOKEN` | Private reset key for clearing scores (minimum 32 characters) |
 
 ## Scripts
 

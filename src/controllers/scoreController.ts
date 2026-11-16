@@ -1,5 +1,7 @@
 import asyncHandler from 'express-async-handler';
 import { Request, Response, RequestHandler } from 'express';
+import { timingSafeEqual } from 'node:crypto';
+import { SCORE_RESET_TOKEN } from '../env';
 import { ScoreModel } from '../models/scoreModel';
 
 const MAX_ATTEMPTS = 3;
@@ -53,4 +55,28 @@ export const saveScore: RequestHandler = asyncHandler(async (req: Request, res: 
     await existing.save();
 
     res.status(200).json(existing);
+});
+
+// @desc    Clear all saved scores
+// @route   DELETE /api/scores
+// @access  Protected by SCORE_RESET_TOKEN
+export const clearScores: RequestHandler = asyncHandler(async (req: Request, res: Response) => {
+    if (!SCORE_RESET_TOKEN || SCORE_RESET_TOKEN.length < 32) {
+        res.status(503).json({ message: 'Score reset is not configured on the server.' });
+        return;
+    }
+
+    const providedToken = req.get('x-score-reset-token') ?? '';
+    const expectedBuffer = Buffer.from(SCORE_RESET_TOKEN);
+    const providedBuffer = Buffer.from(providedToken);
+    const tokenMatches = providedBuffer.length === expectedBuffer.length
+        && timingSafeEqual(providedBuffer, expectedBuffer);
+
+    if (!tokenMatches) {
+        res.status(403).json({ message: 'The reset key is invalid.' });
+        return;
+    }
+
+    const result = await ScoreModel.deleteMany({});
+    res.status(200).json({ deletedCount: result.deletedCount });
 });
